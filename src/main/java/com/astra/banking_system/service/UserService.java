@@ -1,6 +1,7 @@
 package com.astra.banking_system.service;
 
 import com.astra.banking_system.dto.RegisterRequest;
+import com.astra.banking_system.enums.Role;
 import com.astra.banking_system.model.User;
 import com.astra.banking_system.repository.UserRepo;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class UserService {
         user.setEmail(request.getEmail());
         user.setNicNo(request.getNicNo());
         user.setPassword(request.getPassword());
+        user.setRole(Role.ROLE_USER);
         return userRepo.save(user);
     }
 }
