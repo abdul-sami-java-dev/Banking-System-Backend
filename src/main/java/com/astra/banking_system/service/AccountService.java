@@ -1,6 +1,7 @@
 package com.astra.banking_system.service;
 
 import com.astra.banking_system.dto.AccountCreationRequest;
+import com.astra.banking_system.dto.AccountDetailsResponse;
 import com.astra.banking_system.dto.BalanceResponse;
 import com.astra.banking_system.enums.Status;
 import com.astra.banking_system.model.Account;
@@ -56,6 +57,21 @@ public class AccountService {
                 new RuntimeException("Account Not Found"));
         return new BalanceResponse(
                 account.getBalance()
+        );
+    }
+
+    public AccountDetailsResponse getAccountDetails(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepo.findByEmail(email).orElseThrow(()-> new RuntimeException("User Not Found"));
+        Account account = accountRepo.findByUserId(user.getId()).orElseThrow(()->
+                new RuntimeException("Account Not Found"));
+        return new AccountDetailsResponse(
+                account.getAccountNumber(),
+                account.getBalance(),
+                account.getAccountType(),
+                account.getStatus(),
+                account.getCreatedAt()
+
         );
     }
 
