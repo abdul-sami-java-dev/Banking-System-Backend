@@ -62,8 +62,12 @@ public class TransactionService {
         User user = userRepo.findByEmail(email).orElseThrow(()->
                 new RuntimeException("Email Not Found"));
 
-        Account fromAccount = userRepo.findByUserId(user.getId());
-        Account toAccount = userRepo.findByAccountNumber(request.getToAccount());
+        Account fromAccount = userRepo.findByUserId(user.getId()).orElseThrow(
+                ()-> new RuntimeException("Sender Account Not Found")
+        );
+        Account toAccount = userRepo.findByAccountNumber(request.getToAccount()).orElseThrow(
+                ()->new RuntimeException("Receiver Account Not Found ")
+        );
 
         fromAccount.setBalance(fromAccount.getBalance().subtract(request.getAmount()));
         toAccount.setBalance(toAccount.getBalance().add(request.getAmount()));

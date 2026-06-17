@@ -30,4 +30,5 @@ public class TransactionController {
         transactionService.deposit(request);
         return ResponseEntity.ok("Transfer Successful");
     }
+
 }
