@@ -12,6 +12,7 @@ public class User {
     private Long id;
     private String userName;
     private String nicNo;
+    @Column(unique = true)
     private String email;
     private String password;
 

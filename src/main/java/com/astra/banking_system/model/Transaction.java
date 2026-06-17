@@ -1,7 +1,9 @@
 package com.astra.banking_system.model;
 
+import com.astra.banking_system.enums.TransactionType;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,7 +14,10 @@ public class Transaction {
 
     private LocalDateTime transactionDate;
 
-    private Long amount;
+    private BigDecimal amount;
+
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -42,11 +47,19 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public Long getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
     }
 }

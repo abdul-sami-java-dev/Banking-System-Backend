@@ -4,7 +4,8 @@ import com.astra.banking_system.enums.Status;
 import com.astra.banking_system.enums.Type;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 public class Account {
@@ -15,7 +16,7 @@ public class Account {
     @Column(unique = true)
     private String accountNumber;
 
-    private Long balance;
+    private BigDecimal balance;
 
     @Enumerated(EnumType.STRING)
     private Type accountType;
@@ -23,7 +24,7 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -61,11 +62,11 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public Long getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -77,11 +78,11 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 }
