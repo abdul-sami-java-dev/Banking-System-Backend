@@ -20,15 +20,19 @@ public class Transaction {
     private TransactionType transactionType;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @JoinColumn(name = "from_account_id")
+    private Account fromAccount;
 
-    public Account getAccount() {
-        return account;
+    @ManyToOne
+    @JoinColumn(name = "to_account_id")
+    private Account toAccount;
+
+    public Account getFromAccount() {
+        return fromAccount;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setFromAccount(Account fromAccount) {
+        this.fromAccount = fromAccount;
     }
 
     public Long getId() {
@@ -61,5 +65,13 @@ public class Transaction {
 
     public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public Account getToAccount() {
+        return toAccount;
+    }
+
+    public void setToAccount(Account toAccount) {
+        this.toAccount = toAccount;
     }
 }

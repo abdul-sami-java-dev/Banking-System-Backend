@@ -1,5 +1,6 @@
 package com.astra.banking_system.repository;
 
+import com.astra.banking_system.model.Account;
 import com.astra.banking_system.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,7 @@ public interface UserRepo extends JpaRepository<User,Long> {
 
    Optional<User> findByUserName(String userName);
 
+   Account findByUserId(Long id);
+
+   Account findByAccountNumber(String accountNumber);
 }
