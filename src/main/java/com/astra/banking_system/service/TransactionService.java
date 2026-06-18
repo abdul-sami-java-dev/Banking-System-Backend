@@ -115,8 +115,13 @@ public class TransactionService {
         );
         return transaction.stream()
                 .map(transaction1 -> new TransactionHistoryResponse(
-                        transaction1.getFromAccount().getAccountNumber(),
-                        transaction1.getToAccount().getAccountNumber(),
+
+                        transaction1.getFromAccount() != null ?
+                        transaction1.getFromAccount().getAccountNumber()
+                                :"Bank",
+                        transaction1.getToAccount() != null?
+                        transaction1.getToAccount().getAccountNumber()
+                                :"System",
                         transaction1.getAmount(),
                         transaction1.getTransactionType(),
                         transaction1.getTransactionDate()
