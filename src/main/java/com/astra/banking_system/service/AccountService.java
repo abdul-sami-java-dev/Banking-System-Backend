@@ -8,8 +8,6 @@ import com.astra.banking_system.model.Account;
 import com.astra.banking_system.model.User;
 import com.astra.banking_system.repository.AccountRepo;
 import com.astra.banking_system.repository.UserRepo;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +51,7 @@ public class AccountService {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepo.findByEmail(email).orElseThrow(()->
                 new RuntimeException("Email Not Found"));
-        Account account = accountRepo.findByUserId(user.getId()).orElseThrow(()->
+        Account account = accountRepo.findByUser_Id(user.getId()).orElseThrow(()->
                 new RuntimeException("Account Not Found"));
         return new BalanceResponse(
                 account.getBalance()
@@ -63,7 +61,7 @@ public class AccountService {
     public AccountDetailsResponse getAccountDetails(){
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepo.findByEmail(email).orElseThrow(()-> new RuntimeException("User Not Found"));
-        Account account = accountRepo.findByUserId(user.getId()).orElseThrow(()->
+        Account account = accountRepo.findByUser_Id(user.getId()).orElseThrow(()->
                 new RuntimeException("Account Not Found"));
         return new AccountDetailsResponse(
                 account.getAccountNumber(),
