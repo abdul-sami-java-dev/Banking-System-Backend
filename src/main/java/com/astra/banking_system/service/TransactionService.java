@@ -86,6 +86,13 @@ public class TransactionService {
                 ()->new RuntimeException("Receiver Account Not Found ")
         );
 
+        BigDecimal currentBalance = fromAccount.getBalance() == null
+                ? BigDecimal.ZERO
+                : fromAccount.getBalance();
+
+        if (currentBalance.compareTo(request.getAmount())<0){
+            throw new RuntimeException("Insufficient Balance");
+        }
         fromAccount.setBalance(fromAccount.getBalance().subtract(request.getAmount()));
         toAccount.setBalance(toAccount.getBalance().add(request.getAmount()));
 
